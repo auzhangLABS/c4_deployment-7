@@ -12,7 +12,7 @@ RUN pip install gunicorn
 
 RUN python database.py
 
-RUN python load_data.py
+# RUN python load_data.py
 
 EXPOSE 8000
 
