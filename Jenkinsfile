@@ -1,7 +1,7 @@
 pipeline {
   agent {label 'awsDeploy2'}
   environment{
-      DOCKERHUB_CREDENTIALS = credentials('aubreyz-dockerhub')
+      DOCKERHUB_CREDENTIALS = credentials('aubreyz')
       }
    stages {
      
