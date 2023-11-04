@@ -36,11 +36,41 @@ The infrastructure that Terraform created includes:
    - 1 Internet Gateway
    - 1 NAT Gateway
 - In ALB.tf:
-   - Target Group: responsible for routing traffic to the receivers (IP).
+   - Target Group: responsible for routing traffic to the receivers (IP). We set the target to be identified by IP address and enabled health check. This allows the ALB to send requests to the path to ensure the targets are healthy and able to handle incoming requests.
    - Application Load Balancer: distributes incoming traffic to multiple targets.
    - ALB Listener: checks for requests from clients using port 80.
 - In main.tf:
    - ECS Cluster: used to organize and run containerized applications.
-   - CloudWatch Log Group: stored the logs from the ECS container.
-   - ECS Task Definition: Blueprint for running containers may include the image, port, and resources (memory and CPU).
-   - ECS Service: manage the deployment and scale the task definition.
+   - CloudWatch Log Group: stored the logs from the ECS service.
+   - ECS Task Definition: Blueprint for running containers may include the image, port, and resources (memory and CPU). In this deployment, we expose port 8000 of the container and run with Fargate (serverless infrastructure). We also set the memory and cpu requirements for this task
+   - ECS Service: manage the deployment and scale the task definition. We configured this to use the Fargate launch type that allows us to run the container without the use of instances. Additionally, we specified the desired count to two which would ensure that two tasks are running at any given time
+ 
+Here is a visual look at the resources:
+![d7 2 drawio](https://github.com/auzhangLABS/c4_deployment-7/assets/138344000/ecb5c7cb-1bcc-4d51-993c-aefbdeec4576)
+
+#### Customizing the Jenkin Pipeline Configuration
+1. Edit Jenkinsfile line 4 to integrate my Dockhub account:
+   `DOCKERHUB_CREDENTIALS = credentials('your docker user name-dockerhub')`: this line tells Jenkins to use your Docker credentials stored on Jenkins to authenticate.
+3. Modify Jenkinsfile lines 31 and 42 with my Docker image
+   `sh 'docker build -t aubreyz/bank4 .` and `sh 'docker push aubreyz/bank4'`: ensuring Jenkins build and pushes using the correct image
+
+#### Configuring Jenkins with Docker and other Credentials
+First, I added my AWS access and secret key to Jenkins global credentials. To see how I added my credentials to Jenkins, click [here](Jenkins credentials) <br>
+Then, I created my Docker token from Docker Hub, in which I entered my Docken token into the Jenkin global credentials section. here is how I enter my docker credentials: <br>
+![image](https://github.com/auzhangLABS/c4_deployment-7/assets/138344000/671a29be-3667-4412-83b9-aad5d8a6f1eb)
+
+#### Running the Jenkins Pipeline and verifying Application and Infrastructure
+We ran a multibranch pipeline. Once this is finished we check our infrastructure to make sure it is correct as well as check the banking application to make sure it's running
+We ran a multibranch pipeline within Jenkins to deploy our banking application. Once this was successful, we performed a verification of the infrastructure to ensure all resources were created. Additionally, we check our banking application to ensure that it is working using the ALB DNS. <br>
+![image](https://github.com/auzhangLABS/c4_deployment-7/assets/138344000/8c80a553-757b-4ad1-90bc-9597589f2cba)
+
+Please Note: The implementation was carried out on a new branch called Stage. After testing and ensuring that all files worked properly, I merged it back to the main from the Git repository.
+
+## Issues and Troubleshooting
+I encountered an issue with the Jenkins Pipeline where the Docker authentication was not accepting my credentials. I resolve this by appending `-dockerhub` to my username. 
+
+## Optimization
+Implement an Auto Scaling Group. Currently, we have a static amount of containers running. To accommodate traffic spikes we can consider an ASG to dynamically adjust the numbers of active containers in response to demand. 
+
+### Commonly Asked Questions:
+
