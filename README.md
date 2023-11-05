@@ -55,7 +55,7 @@ Here is a visual look at the resources:
    `sh 'docker build -t aubreyz/bank4 .` and `sh 'docker push aubreyz/bank4'`: ensuring Jenkins build and pushes using the correct image
 
 #### Configuring Jenkins with Docker and other Credentials
-First, I added my AWS access and secret key to Jenkins global credentials. To see how I added my credentials to Jenkins, click [here](Jenkins credentials) <br>
+First, I added my AWS access and secret key to Jenkins global credentials. To see how I added my credentials to Jenkins, click [here](https://github.com/auzhangLABS/c4_deployment-6-main#configuring-aws-credentials-in-jenkins) <br>
 Then, I created my Docker token from Docker Hub, in which I entered my Docken token into the Jenkin global credentials section. Here is how I enter my Docker credentials: <br>
 ![image](https://github.com/auzhangLABS/c4_deployment-7/assets/138344000/671a29be-3667-4412-83b9-aad5d8a6f1eb)
 
@@ -69,7 +69,7 @@ Just so you know, the implementation was carried out on a new branch called Stag
 ## System Design Diagram:
 ![image](https://github.com/auzhangLABS/c4_deployment-7/assets/138344000/c5f53e96-627f-4389-9590-a2f14ec12a86)
 <br>
-To view the full system design diagram, click [here!](systen diagram)
+To view the full system design diagram, click [here!](https://github.com/auzhangLABS/c4_deployment-7/blob/main/finaldiagram.png)
 
 ## Issues and Troubleshooting
 I encountered an issue with the Jenkins pipeline where the Docker authentication was not accepting my credentials. I resolve this by appending `-dockerhub` to my username.
