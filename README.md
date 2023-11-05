@@ -64,13 +64,22 @@ We ran a multibranch pipeline. Once this is finished we check our infrastructure
 We ran a multibranch pipeline within Jenkins to deploy our banking application. Once this was successful, we performed a verification of the infrastructure to ensure all resources were created. Additionally, we check our banking application to ensure that it is working using the ALB DNS. <br>
 ![image](https://github.com/auzhangLABS/c4_deployment-7/assets/138344000/8c80a553-757b-4ad1-90bc-9597589f2cba)
 
-Please Note: The implementation was carried out on a new branch called Stage. After testing and ensuring that all files worked properly, I merged it back to the main from the Git repository.
+Please note: The implementation was carried out on a new branch called Stage. After testing and ensuring that all files worked properly, I merged it back to the main from the Git repository.
 
+## System Design Diagram:
+
+To view the full system design diagram, click [here!](systen diagram)
 ## Issues and Troubleshooting
-I encountered an issue with the Jenkins Pipeline where the Docker authentication was not accepting my credentials. I resolve this by appending `-dockerhub` to my username. 
+I encountered an issue with the Jenkins Pipeline where the Docker authentication was not accepting my credentials. I resolve this by appending `-dockerhub` to my username.
 
 ## Optimization
-Implement an Auto Scaling Group. Currently, we have a static amount of containers running. To accommodate traffic spikes we can consider an ASG to dynamically adjust the numbers of active containers in response to demand. 
+1. Implement an auto-scaling group: we currently have a static number of containers running. To accommodate traffic spikes, we can consider an ASG to dynamically adjust the number of active containers in response to demand.
+2. Enhance Database Security: Currently, we have our RDS in the public subnet. Consider putting it on a private subnet and making the RDS inaccessible from the public internet.
 
 ### Commonly Asked Questions:
-
+1. Is your infrastructure secure? If yes or no, why?
+   - I believe the container infrastructure is secure. However, the database is not because it currently resides on the public subnet.
+2. What happens when you terminate one instance? Is this infrastructure fault-tolerant?
+   - This infrastructure is fault-tolerant because if one container is down or fails, it will automatically launch another replacement one.
+3. Which subnet were the containers deployed?
+   - Containers were deployed in the private subnet of us-east-1a and us-east-1b
