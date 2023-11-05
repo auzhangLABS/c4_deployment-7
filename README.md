@@ -4,7 +4,7 @@
 The primary goal of deployment 7 is to familiarize ourselves with containerizing our banking applications with tools like Docker and Amazon Elastic Container (ECS). We will use AWS Fargate with ECS, which allows us to get the benefits of container orchestration and container management from ECS. This banking application will also include a shared Relational Database Service (RDS), which ensures consistent data across the containers. We also implemented an Application Load Blancher (ALB) that would distribute the traffic among the containers. This deployment allows us to mitigate configuration drift and optimize our resources.
 
 ## Steps:
-I began this deployment by creating a new branch called `stage` in Git
+I began this deployment by creating a new branch called `stage` in Git and creating a new RDS. To see how to create a new RDS, click [here!](https://github.com/auzhangLABS/c4_deployment-6-main)
 
 #### Provisioning our First AWS Infrastructure with Terraform
 I created a new AWS infrastructure using this [Terraform file](terraform file) that I created. This file is designed to create three distinct instances within my default VPC. Each instance has a specific configuration using different user data. Here is a detailed look: 
