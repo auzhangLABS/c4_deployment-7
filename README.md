@@ -22,7 +22,7 @@ We use the Jenkinsfile to leverage Jenkins agents on both the Terraform and Dock
 
 To see the full JenkinsFile, click [here!](https://github.com/auzhangLABS/c4_deployment-7/blob/main/Jenkinsfiles).
 
-The infrastructure that Terraform created includes:
+The second AWS infrastructure that Terraform agent created includes:
 - In [VPC.tf](https://github.com/auzhangLABS/c4_deployment-7/blob/main/intTerraform/vpc.tf) :
    - 1 VPC
    - 2 Available Zones
@@ -60,7 +60,7 @@ Then, I created my Docker token from Docker Hub, in which I entered my Docken to
 ![image](https://github.com/auzhangLABS/c4_deployment-7/assets/138344000/671a29be-3667-4412-83b9-aad5d8a6f1eb)
 
 #### Running the Jenkins Pipeline and verifying Application and Infrastructure
-We ran a multibranch pipeline. Once this is finished, we check our infrastructure to make sure it is correct, as well as check the banking application to make sure it's running
+We ran a multibranch pipeline. Once this is finished, we check our infrastructure to make sure it is correct, as well as check the banking application to make sure it's running.
 We ran a multibranch pipeline within Jenkins to deploy our banking application. Once this was successful, we performed a verification of the infrastructure to ensure all resources were created. Additionally, we check our banking application to ensure it works using the ALB DNS. <br>
 ![image](https://github.com/auzhangLABS/c4_deployment-7/assets/138344000/8c80a553-757b-4ad1-90bc-9597589f2cba)
 
